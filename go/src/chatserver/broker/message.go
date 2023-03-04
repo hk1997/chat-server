@@ -9,10 +9,10 @@ type Message struct {
 }
 
 type Acknowledgement struct {
-	id                  int64
-	messageId           int64
-	acknowledgementType Status
-	timestamp           int64
+	id        int64
+	messageId int64
+	status    Status
+	timestamp int64
 }
 
 type Status int8
