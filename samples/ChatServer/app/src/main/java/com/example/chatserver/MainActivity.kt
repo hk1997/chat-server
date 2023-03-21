@@ -10,11 +10,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.chatserver.firebase.ChatServerFirebaseMessagingService
 import com.example.chatserver.ui.theme.ChatServerTheme
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var chatserverFirebaseMessaging: ChatServerFirebaseMessagingService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        chatserverFirebaseMessaging = ChatServerFirebaseMessagingService()
         setContent {
             ChatServerTheme {
                 // A surface container using the 'background' color from the theme
@@ -24,8 +31,14 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                 }
+
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        chatserverFirebaseMessaging.generateFirebaseToken()
     }
 }
 
